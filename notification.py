@@ -1,16 +1,14 @@
 import win10toast 
 import time
-import _thread
+import _thread as thread
+import sys
+
+ICON_PATH = r'img\\icon.ico' 
 
 def pushNotification(title, msg):
     message = win10toast.ToastNotifier()
-    message.show_toast(title, msg)
+    message.show_toast(title, msg, ICON_PATH, duration=10)
 
-def counter():
-    for i in range(100):
-        print(i)
-        time.sleep(0.1)
-
-_thread.start_new_thread(pushNotification, ("Akcja pierwsza", "Zignoruj ją"))
+thread.start_new_thread(pushNotification, ("Raz dwa trzy", "To jest napad"))
 
 input()
