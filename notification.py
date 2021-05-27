@@ -1,14 +1,25 @@
 import win10toast 
 import time
-import _thread as thread
+import threading
 import sys
+import queueController
 
 ICON_PATH = r'img\\icon.ico' 
+notificationQueue = queueController.Controller()
 
-def pushNotification(title, msg):
+def pushNotification(content):
     message = win10toast.ToastNotifier()
-    message.show_toast(title, msg, ICON_PATH, duration=10)
+    _thread = threading.Thread(target=message.show_toast, args=(content[0], content[1], ICON_PATH,))
+    _thread.run()
+    # _thread.
 
-thread.start_new_thread(pushNotification, ("Raz dwa trzy", "To jest napad"))
+amount = int(input("Give me number of messages: "))
+print("Ok, so now I will ask you about notifiaction content")
+for i in range(amount):
+    uTitle = input("Type name of notification: ")
+    uMessage = input("Type message: ")
+    notificationQueue.AddToQueue(uTitle, uMessage)
 
-input()
+for i in range(amount):
+    pushNotification(notificationQueue.GetFromQueue())
+    
