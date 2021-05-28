@@ -1,5 +1,4 @@
 import queue
-from threading import setprofile
 
 class Controller:
     def __init__(self) -> None:
@@ -11,10 +10,10 @@ class Controller:
     def GetFromQueue(self) -> (str,str):
         return self.queue.get()
     
-    def __DoIHaveItems(self) -> bool:
-        return True if not self.queue.empty() else False
+    def DoIHaveItems(self) -> bool:
+        return not self.queue.empty()
     
-    def __DoIFull(self) -> bool:
+    def DoIFull(self) -> bool:
         return self.queue.full()
     
 
