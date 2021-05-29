@@ -6,7 +6,9 @@ class Controller:
     def __init__(self, firstNoti=True) -> None:
         self.queue = queue.Queue(10)
         if firstNoti:
-            self.queue.put(("Your Notification Menager is working", "We're waitig for new notification"))
+            self.queue.put((
+                "Your Notification Menager is working", 
+                "We're waitig for new notification"))
    
     def AddToQueue(self, title, msg) -> None:
         self.queue.put((title, msg))
