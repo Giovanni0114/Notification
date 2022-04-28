@@ -1,5 +1,8 @@
 import queue
 import Logger
+import typing
+
+StringPair = typing.Tuple[str, str]
 
 class Controller:
 	def __init__(self, firstNoti=True) -> None:
@@ -14,7 +17,7 @@ class Controller:
 		if self.queue.full(): 
 			Logger.Log("WARN", "Queue of notification is full")
 		
-	def GetFromQueue(self) -> "list[str]":
+	def GetFromQueue(self) -> StringPair:
 		pair = self.queue.get()
 		if self.queue.empty():
 			Logger.Log("WARN", "Queue of notification is empty")
